@@ -19,6 +19,9 @@ import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Login } from "./pages/Login";
+import { LanguageProvider } from "./translations/translationContext";
+import { ThemeProvider } from "./theme/themeContext";
 
 // Define the config
 const config = {
@@ -28,20 +31,24 @@ const config = {
 
 const Stack = createNativeStackNavigator();
 
+// translation context
+
 // extend the theme
 export const theme = extendTheme({ config });
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Test" component={Test} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
@@ -127,88 +134,10 @@ export function Home({ navigation }) {
           </Text>
         </Link>
         <ToggleDarkMode />
-        <Button onPress={() => navigation.navigate("Test")}>
+        <Button onPress={() => navigation.navigate("Login")}>
           <Text>Go to Test</Text>
         </Button>
       </VStack>
-    </Center>
-  );
-}
-
-export function Test({ navigation }) {
-  return (
-    <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          Welcome
-        </Heading>
-        <Heading
-          mt="1"
-          _dark={{
-            color: "warmGray.200",
-          }}
-          color="coolGray.600"
-          fontWeight="medium"
-          size="xs"
-        >
-          Sign in to continue!
-        </Heading>
-
-        <VStack space={3} mt="5">
-          <FormControl>
-            <FormControl.Label>Email ID</FormControl.Label>
-            <Input />
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" />
-            <Link
-              _text={{
-                fontSize: "xs",
-                fontWeight: "500",
-                color: "indigo.500",
-              }}
-              alignSelf="flex-end"
-              mt="1"
-            >
-              Forget Password?
-            </Link>
-          </FormControl>
-          <Button mt="2" colorScheme="indigo">
-            Sign in
-          </Button>
-          <HStack mt="6" justifyContent="center">
-            <Text
-              fontSize="sm"
-              color="coolGray.600"
-              _dark={{
-                color: "warmGray.200",
-              }}
-            >
-              I'm a new user.{" "}
-            </Text>
-            <Link
-              _text={{
-                color: "indigo.500",
-                fontWeight: "medium",
-                fontSize: "sm",
-              }}
-              onPress={() => {
-                navigation.navigate("SignUp");
-              }}
-            >
-              Sign Up
-            </Link>
-          </HStack>
-        </VStack>
-      </Box>
     </Center>
   );
 }
