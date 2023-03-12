@@ -22,6 +22,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Login } from "./pages/Login";
 import { LanguageProvider } from "./translations/translationContext";
 import { ThemeProvider } from "./theme/themeContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 // Define the config
 const config = {
@@ -40,13 +41,15 @@ export default function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <AuthProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="SignUp" component={SignUp} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </AuthProvider>
       </LanguageProvider>
     </ThemeProvider>
   );
