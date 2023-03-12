@@ -1,9 +1,9 @@
 import jwtDecode from "jwt-decode";
 //
 import axios from "./axios";
+import { useNavigation } from "@react-navigation/native";
 
 // ----------------------------------------------------------------------
-const navigate = useNavigation();
 
 const isValidToken = (accessToken) => {
   if (!accessToken) {
@@ -32,8 +32,9 @@ const handleTokenExpired = (exp) => {
     alert("Token expired");
 
     localStorage.removeItem("accessToken");
+    const navigation = useNavigation();
 
-    window.location.href = naviagtion.navigate("Login");
+    navigation.navigate("Login");
   }, timeLeft);
 };
 

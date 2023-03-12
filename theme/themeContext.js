@@ -78,6 +78,7 @@ export const ThemeProvider = ({ children }) => {
     config: {
       // Changing initialColorMode to 'light'
       initialColorMode: "light",
+      useSystemColorMode: false,
     },
     fonts: {
       heading: "Inter",
