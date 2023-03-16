@@ -3,6 +3,7 @@ import { createContext, useEffect, useReducer } from "react";
 // utils
 import axios from "../utils/axios";
 import { isValidToken, setSession } from "../utils/jwt";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // ----------------------------------------------------------------------
 
@@ -70,7 +71,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const initialize = async () => {
       try {
-        const accessToken = localStorage.getItem("accessToken");
+        const accessToken = await AsyncStorage.getItem("accessToken");
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
@@ -110,7 +111,7 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post("/Users/authenticate", {
+    const response = await axios.post("/Security/login", {
       email,
       password,
     });
@@ -126,16 +127,31 @@ function AuthProvider({ children }) {
     });
   };
 
-  const register = async (email, password, firstName, lastName) => {
-    const response = await axios.post("/Users/register", {
+  const register = async (
+    email,
+    password,
+    name,
+    lastName,
+    address,
+    city,
+    state,
+    telephone,
+    zip
+  ) => {
+    const response = await axios.post("/Security/register", {
       email,
       password,
-      firstName,
+      name,
       lastName,
+      address,
+      city,
+      state,
+      telephone,
+      zip,
     });
     const { accessToken, user } = response.data;
 
-    localStorage.setItem("accessToken", accessToken);
+    await AsyncStorage.setItem("accessToken", accessToken);
 
     dispatch({
       type: "REGISTER",

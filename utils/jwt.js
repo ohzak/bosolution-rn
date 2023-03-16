@@ -2,6 +2,7 @@ import jwtDecode from "jwt-decode";
 //
 import axios from "./axios";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // ----------------------------------------------------------------------
 
@@ -27,27 +28,27 @@ const handleTokenExpired = (exp) => {
 
   clearTimeout(expiredTimer);
 
-  expiredTimer = setTimeout(() => {
+  expiredTimer = setTimeout(async () => {
     // eslint-disable-next-line no-alert
     alert("Token expired");
 
-    localStorage.removeItem("accessToken");
+    await AsyncStorage.removeItem("accessToken");
     const navigation = useNavigation();
 
     navigation.navigate("Login");
   }, timeLeft);
 };
 
-const setSession = (accessToken) => {
+const setSession = async (accessToken) => {
   if (accessToken) {
-    localStorage.setItem("accessToken", accessToken);
+    await AsyncStorage.setItem("accessToken", accessToken);
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
     // This function below will handle when token is expired
     const { exp } = jwtDecode(accessToken); // ~5 days by minimals server
     handleTokenExpired(exp);
   } else {
-    localStorage.removeItem("accessToken");
+    await AsyncStorage.removeItem("accessToken");
     delete axios.defaults.headers.common.Authorization;
   }
 };
