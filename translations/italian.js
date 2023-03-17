@@ -2,7 +2,7 @@ export const IT = {
   welcome: "Benvenuto",
   signin_continue: "Accedi per continuare!",
   sign_in: "Accedi",
-  email: "E-Mail",
+  email: "E-mail",
   password: "Password",
   password_forgot_question: "Password Dimenticata?",
   confirm_password: "Conferma password",
@@ -15,4 +15,18 @@ export const IT = {
   sign_up: "Registrati",
   sign_up_subtitle: "La registrazione richiede meno di un minuto.",
   zip: "CAP",
+  email_required: "L' E-mail è richiesta",
+  email_invalid: "L'E-mail inserita non è valida, inserire un e-mail valida",
+  password_helper:
+    "La password deve contenere almeno 8 caratteri, un simbolo e un carattere maiuscolo",
+  password_invalid:
+    "Password non valida, la password deve contenere almeno 8 caratteri, un simbolo e un carattere maiuscolo",
+  password_no_match: "Le password non corrispondono",
+  name_required: "Il nome è richiesto",
+  lastname_required: "Il cognome è richiesto",
+  swiss_telephone_invalid: "Inserire un numero di telefono svizzero valido",
+  address_required: "L'indirizzo è richiesto",
+  city_required: "La città è richiesta",
+  state_required: "Il cantone è richiesto",
+  zip_required: "Il CAP è richiesto",
 };

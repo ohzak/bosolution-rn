@@ -15,4 +15,18 @@ export const EN = {
   sign_up: "Sign up",
   sign_up_subtitle: "Registration takes less than a minute.",
   zip: "Postal Code",
+  email_required: "Email is required",
+  email_invalid: "Email is not valid, please insert a valid email",
+  password_helper:
+    "Password must contain at least 8 characters, one symbol and one upper case character",
+  password_invalid:
+    "Password is not valid,the password must have at least 8 characters, one symbol and one upper case character",
+  password_no_match: "Passwords do not match",
+  name_required: "Name is required",
+  lastname_required: "Last name is required",
+  swiss_telephone_invalid: "Please insert a valid swiss phone number",
+  address_required: "The address is required",
+  city_required: "La città è richiesta",
+  state_required: "Il cantone è richiesto",
+  zip_required: "Il CAP è richiesto",
 };
