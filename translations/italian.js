@@ -29,4 +29,5 @@ export const IT = {
   city_required: "La città è richiesta",
   state_required: "Il cantone è richiesto",
   zip_required: "Il CAP è richiesto",
+  submitting: "Invio in corso",
 };

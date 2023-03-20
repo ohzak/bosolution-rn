@@ -30,4 +30,5 @@ export const DE = {
   city_required: "Die Stadt ist erforderlich",
   state_required: "Der Kanton ist erforderlich ",
   zip_required: "Die PLZ ist erforderlich",
+  submitting: "Einreichen",
 };
