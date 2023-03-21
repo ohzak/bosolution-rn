@@ -15,6 +15,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import Constants from "expo-constants";
 import { AuthContext } from "../contexts/AuthContext";
 import { reg_email, reg_password, reg_swiss_telephone } from "../utils/regex";
+import { GOOGLE_PLACES_API_KEY } from "../config";
 
 export function SignUp({ navigation }) {
   const { i18n, locale } = useContext(LanguageContext);
@@ -243,6 +244,19 @@ export function SignUp({ navigation }) {
               />
               <FormControl.ErrorMessage>{errors?.zip}</FormControl.ErrorMessage>
             </FormControl>
+            <GooglePlacesAutocomplete
+              placeholder="Search"
+              query={{
+                key: GOOGLE_PLACES_API_KEY,
+                language: "en", // language of the results
+              }}
+              onPress={(data, details = null) => console.log(data)}
+              onFail={(error) => console.error(error)}
+              requestUrl={{
+                url: "https://maps.googleapis.com/maps/api",
+                useOnPlatform: "web",
+              }} // this in only required for use on the web. See https://git.io/JflFv more for details.
+            />
             <FormControl isInvalid={"submit" in errors}>
               <Button
                 isLoading={isLoading}
