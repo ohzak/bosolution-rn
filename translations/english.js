@@ -30,4 +30,8 @@ export const EN = {
   state_required: "Il cantone è richiesto",
   zip_required: "Il CAP è richiesto",
   submitting: "Submitting",
+  street: "Street",
+  complete_address: "Complete address",
+  validate: "Email Validation",
+  change_email: "Change email",
 };
