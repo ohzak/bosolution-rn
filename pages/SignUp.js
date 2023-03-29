@@ -38,7 +38,8 @@ export function SignUp({ navigation }) {
           data.city,
           data.state,
           data.telephone,
-          data.zip
+          data.zip,
+          data.placesId
         );
       } catch (error) {
         setErrors({ ...errors, submit: error });
@@ -95,6 +96,33 @@ export function SignUp({ navigation }) {
     } else {
       setErrors(messages);
     }
+  };
+
+  const autocomplete = (d, details) => {
+    let address = details.address_components.find((item) =>
+      item.types.includes("route")
+    )?.long_name;
+    let number = details.address_components.find((item) =>
+      item.types.includes("street_number")
+    )?.long_name;
+    let city = details.address_components.find((item) =>
+      item.types.includes("locality")
+    )?.long_name;
+    let state = details.address_components.find((item) =>
+      item.types.includes("administrative_area_level_1")
+    )?.short_name;
+    let zip = details.address_components.find((item) =>
+      item.types.includes("postal_code")
+    )?.long_name;
+
+    setData({
+      ...data,
+      address: `${address} ${number}`,
+      city: city,
+      state: state,
+      zip: zip,
+      placeId: d.place_id,
+    });
   };
   return (
     <ScrollView mt={Constants.statusBarHeight}>
@@ -206,10 +234,30 @@ export function SignUp({ navigation }) {
                 {errors?.telephone}
               </FormControl.ErrorMessage>
             </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                {i18n.t("complete_address")}
+              </FormControl.Label>
+              <GooglePlacesAutocomplete
+                placeholder="Search"
+                query={{
+                  key: "AIzaSyA14yD0_GZHN21qjThSndnfq1lw2cfMe9M",
+                  language: "en", // language of the results
+                }}
+                onPress={(d, details = null) => autocomplete(d, details)}
+                onFail={(error) => console.error(error)}
+                requestUrl={{
+                  url: "http://localhost:8010/proxy",
+                  useOnPlatform: "web",
+                }}
+                fetchDetails
+              />
+            </FormControl>
             <FormControl isInvalid={"address" in errors}>
-              <FormControl.Label>{i18n.t("address")}</FormControl.Label>
+              <FormControl.Label>{i18n.t("street")}</FormControl.Label>
               <Input
-                placeholder={i18n.t("address")}
+                placeholder={i18n.t("street")}
+                value={data.address}
                 onChangeText={(value) => setData({ ...data, address: value })}
               />
               <FormControl.ErrorMessage>
@@ -220,6 +268,7 @@ export function SignUp({ navigation }) {
               <FormControl.Label>{i18n.t("state")}</FormControl.Label>
               <Input
                 placeholder={i18n.t("state")}
+                value={data.state}
                 onChangeText={(value) => setData({ ...data, state: value })}
               />
               <FormControl.ErrorMessage>
@@ -230,6 +279,7 @@ export function SignUp({ navigation }) {
               <FormControl.Label>{i18n.t("city")}</FormControl.Label>
               <Input
                 placeholder={i18n.t("city")}
+                value={data.city}
                 onChangeText={(value) => setData({ ...data, city: value })}
               />
               <FormControl.ErrorMessage>
@@ -240,23 +290,12 @@ export function SignUp({ navigation }) {
               <FormControl.Label>{i18n.t("zip")}</FormControl.Label>
               <Input
                 placeholder={i18n.t("zip")}
+                value={data.zip}
                 onChangeText={(value) => setData({ ...data, zip: value })}
               />
               <FormControl.ErrorMessage>{errors?.zip}</FormControl.ErrorMessage>
             </FormControl>
-            <GooglePlacesAutocomplete
-              placeholder="Search"
-              query={{
-                key: GOOGLE_PLACES_API_KEY,
-                language: "en", // language of the results
-              }}
-              onPress={(data, details = null) => console.log(data)}
-              onFail={(error) => console.error(error)}
-              requestUrl={{
-                url: "https://maps.googleapis.com/maps/api",
-                useOnPlatform: "web",
-              }} // this in only required for use on the web. See https://git.io/JflFv more for details.
-            />
+
             <FormControl isInvalid={"submit" in errors}>
               <Button
                 isLoading={isLoading}

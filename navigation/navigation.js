@@ -6,20 +6,27 @@ import { Login } from "../pages/Login";
 import { SignUp } from "../pages/SignUp";
 import { Home } from "../pages/Home";
 import { GooglePlaces } from "../pages/GooglePlaces";
+import { Validation } from "../pages/Validation";
 
 const Stack = createNativeStackNavigator();
 
 export const NavigationProvider = ({ children }) => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthenticated ? (
           // schermate per utenti loggati
-          <Stack.Group>
-            <Stack.Screen name="Home" component={Home} />
-          </Stack.Group>
+          user.roles.includes("valid") ? (
+            <Stack.Group>
+              <Stack.Screen name="Home" component={Home} />
+            </Stack.Group>
+          ) : (
+            <Stack.Group>
+              <Stack.Screen name="Validation" component={Validation} />
+            </Stack.Group>
+          )
         ) : (
           // schermate per utenti non loggati
           <Stack.Group>

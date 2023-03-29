@@ -46,6 +46,10 @@ const handlers = {
       user,
     };
   },
+  VALIDATE: (state, action) => {
+    ...state,
+    user,
+  }
 };
 
 const reducer = (state, action) =>
@@ -57,6 +61,7 @@ const AuthContext = createContext({
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   register: () => Promise.resolve(),
+  validate: () => Promise.resolve(),
 });
 
 // ----------------------------------------------------------------------
@@ -160,6 +165,18 @@ function AuthProvider({ children }) {
       },
     });
   };
+
+  const validate = async () =>{
+    const response = await axios.get("/Security/validation")
+    const {accessToken, user = response.data}
+
+    dispatch({
+      type:"VALIDATE",
+      payload:{
+        user,
+      }
+    })
+  }
 
   const logout = async () => {
     setSession(null);

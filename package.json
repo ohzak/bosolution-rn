@@ -14,7 +14,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "proxy": "lcp --proxyUrl https://maps.googleapis.com/maps/api"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.3",
@@ -25,11 +26,13 @@
     "axios": "^1.3.4",
     "expo": "^44.0.0",
     "expo-app-loading": "~1.3.0",
+    "expo-constants": "~13.0.1",
     "expo-font": "~10.0.4",
     "expo-localization": "~12.0.0",
     "expo-status-bar": "~1.2.0",
     "i18n-js": "^4.2.3",
     "jwt-decode": "^3.1.2",
+    "local-cors-proxy": "^1.1.0",
     "native-base": "3.4.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -38,8 +41,7 @@
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-svg": "12.1.1",
-    "react-native-web": "0.17.1",
-    "expo-constants": "~13.0.1"
+    "react-native-web": "0.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -30,4 +30,8 @@ export const IT = {
   state_required: "Il cantone è richiesto",
   zip_required: "Il CAP è richiesto",
   submitting: "Invio in corso",
+  street: "Via / Piazza",
+  complete_address: "Indirizzo Completo",
+  validate: "Validazione E-mail",
+  change_email: "Cambia E-mail",
 };

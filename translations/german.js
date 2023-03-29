@@ -31,4 +31,8 @@ export const DE = {
   state_required: "Der Kanton ist erforderlich ",
   zip_required: "Die PLZ ist erforderlich",
   submitting: "Einreichen",
+  street: "Strasse",
+  complete_address: "Vollständige Adresse",
+  validate: "E-Mail-Validierung",
+  change_email: "E-Mail-Änderung",
 };
