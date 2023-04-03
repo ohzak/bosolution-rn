@@ -18,7 +18,7 @@ export const NavigationProvider = ({ children }) => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthenticated ? (
           // schermate per utenti loggati
-          user.roles.includes("valid") ? (
+          user.roles?.includes("valid") ? (
             <Stack.Group>
               <Stack.Screen name="Home" component={Home} />
             </Stack.Group>

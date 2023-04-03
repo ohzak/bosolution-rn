@@ -47,11 +47,13 @@ const handlers = {
     };
   },
   VALIDATE: (state, action) => {
-    ...state,
-    user,
-  }
+    const { user } = action.payload;
+    return {
+      ...state,
+      user,
+    };
+  },
 };
-
 const reducer = (state, action) =>
   handlers[action.type] ? handlers[action.type](state, action) : state;
 
@@ -141,7 +143,8 @@ function AuthProvider({ children }) {
     city,
     state,
     telephone,
-    zip
+    zip,
+    placeId
   ) => {
     const response = await axios.post("/Security/register", {
       email,
@@ -153,6 +156,7 @@ function AuthProvider({ children }) {
       state,
       telephone,
       zip,
+      placeId,
     });
     const { accessToken, user } = response.data;
 
@@ -166,17 +170,17 @@ function AuthProvider({ children }) {
     });
   };
 
-  const validate = async () =>{
-    const response = await axios.get("/Security/validation")
-    const {accessToken, user = response.data}
+  const validate = async () => {
+    const response = await axios.get("/Security/validation");
+    const { accessToken, user } = response.data;
 
     dispatch({
-      type:"VALIDATE",
-      payload:{
+      type: "VALIDATE",
+      payload: {
         user,
-      }
-    })
-  }
+      },
+    });
+  };
 
   const logout = async () => {
     setSession(null);
@@ -191,6 +195,7 @@ function AuthProvider({ children }) {
         login,
         logout,
         register,
+        validate,
       }}
     >
       {children}

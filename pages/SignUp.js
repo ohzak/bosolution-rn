@@ -39,7 +39,7 @@ export function SignUp({ navigation }) {
           data.state,
           data.telephone,
           data.zip,
-          data.placesId
+          data.placeId
         );
       } catch (error) {
         setErrors({ ...errors, submit: error });

@@ -7,16 +7,16 @@ import {
   Heading,
   Input,
   ScrollView,
+  Text,
   View,
   VStack,
 } from "native-base";
 import { LanguageContext } from "../translations/translationContext";
 import { AuthContext } from "../contexts/AuthContext";
 
-const { i18n, locale } = useContext(LanguageContext);
-const { user, validate } = useContext(AuthContext);
-
 export const Validation = ({ navigator }) => {
+  const { i18n, locale } = useContext(LanguageContext);
+  const { user, validate } = useContext(AuthContext);
   return (
     <Center flex={1}>
       <Box safeArea w="100%" maxW={"400px"} py="8" bg={"white"} rounded={"xl"}>
