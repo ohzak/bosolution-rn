@@ -16,6 +16,8 @@ import Constants from "expo-constants";
 import { AuthContext } from "../contexts/AuthContext";
 import { reg_email, reg_password, reg_swiss_telephone } from "../utils/regex";
 import { GOOGLE_PLACES_API_KEY } from "../config";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ViewBase } from "react-native";
 
 export function SignUp({ navigation }) {
   const { i18n, locale } = useContext(LanguageContext);
@@ -125,7 +127,7 @@ export function SignUp({ navigation }) {
     });
   };
   return (
-    <ScrollView mt={Constants.statusBarHeight}>
+    <View mt={Constants.statusBarHeight}>
       <Center flex={1}>
         <Box
           safeArea
@@ -316,6 +318,6 @@ export function SignUp({ navigation }) {
           </VStack>
         </Box>
       </Center>
-    </ScrollView>
+    </View>
   );
 }

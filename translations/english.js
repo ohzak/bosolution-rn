@@ -34,4 +34,9 @@ export const EN = {
   complete_address: "Complete address",
   validate: "Email Validation",
   change_email: "Change email",
+  email_sent_pre: "An email has been sent to ",
+  email_sent_post:
+    " please check your email and follow the instructions to activate your account",
+  change_validation_email: "Change validation email",
+  new_email: "insert new validation email",
 };

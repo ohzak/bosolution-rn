@@ -35,4 +35,9 @@ export const DE = {
   complete_address: "Vollständige Adresse",
   validate: "E-Mail-Validierung",
   change_email: "E-Mail-Änderung",
+  email_sent_pre: "Eine E-Mail wurde an ",
+  email_sent_post:
+    " gesendet, bitte überprüfen Sie Ihre E-Mail und folgen Sie den Anweisungen, um Ihr Konto zu aktivieren",
+  change_validation_email: "Ändern Sie die Validierungs-E-Mail",
+  new_email: "neue Validierungs-E-Mail eingeben",
 };

@@ -34,4 +34,9 @@ export const IT = {
   complete_address: "Indirizzo Completo",
   validate: "Validazione E-mail",
   change_email: "Cambia E-mail",
+  email_sent_pre: "Un'email è stata inviata a ",
+  email_sent_post:
+    " controlla la tua email e segui le istruzioni per attivare il tuo account.",
+  change_validation_email: "Cambia E-mail di validazione",
+  new_email: "Inserisci nuova E-mail di validazione",
 };
