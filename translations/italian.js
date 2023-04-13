@@ -39,4 +39,5 @@ export const IT = {
     " controlla la tua email e segui le istruzioni per attivare il tuo account.",
   change_validation_email: "Cambia E-mail di validazione",
   new_email: "Inserisci nuova E-mail di validazione",
+  proceed: "Procedi",
 };

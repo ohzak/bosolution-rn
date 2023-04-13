@@ -35,8 +35,8 @@ export function Login({ navigation }) {
   };
 
   return (
-    <Center>
-      <Box safeArea p="2" w="90%" maxW="400" py="8" bg={"white"} rounded={"xl"}>
+    <Center flex={1}>
+      <Box safeArea w="100%" maxW={"400px"} py="8" bg={"white"} rounded={"xl"}>
         <Heading
           size="lg"
           fontWeight="600"

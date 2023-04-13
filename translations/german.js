@@ -40,4 +40,5 @@ export const DE = {
     " gesendet, bitte überprüfen Sie Ihre E-Mail und folgen Sie den Anweisungen, um Ihr Konto zu aktivieren",
   change_validation_email: "Ändern Sie die Validierungs-E-Mail",
   new_email: "neue Validierungs-E-Mail eingeben",
+  proceed: "Fortfahren",
 };

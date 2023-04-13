@@ -39,4 +39,5 @@ export const EN = {
     " please check your email and follow the instructions to activate your account",
   change_validation_email: "Change validation email",
   new_email: "insert new validation email",
+  proceed: "Proceed",
 };
