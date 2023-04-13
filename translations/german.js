@@ -35,10 +35,20 @@ export const DE = {
   complete_address: "Vollständige Adresse",
   validate: "E-Mail-Validierung",
   change_email: "E-Mail-Änderung",
-  email_sent_pre: "Eine E-Mail wurde an ",
+  email_sent_pre: "Eine E-Mail wird an ",
   email_sent_post:
-    " gesendet, bitte überprüfen Sie Ihre E-Mail und folgen Sie den Anweisungen, um Ihr Konto zu aktivieren",
+    " gesendet, bitte überprüfen Sie Ihre E-Mail und schreibe hier den Validierungscode, um Ihr Konto zu aktivieren.",
   change_validation_email: "Ändern Sie die Validierungs-E-Mail",
   new_email: "neue Validierungs-E-Mail eingeben",
   proceed: "Fortfahren",
+  validate_email_subject: "Bestätigen Sie Ihre E-Mail - BOSolution",
+  email_prefix: "Liebe Herr / Frau",
+  email_message:
+    "Bitte klicken Sie auf den folgenden Link, um Ihre E-Mail zu bestätigen",
+  email_submessage:
+    "Wenn Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail",
+  email_verify_label: "E-Mail überprüfen",
+  validation_code: "Bestätigungscode",
+  send_email: "E-Mail senden",
+  validate: "Bestätigen",
 };

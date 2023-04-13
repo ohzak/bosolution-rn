@@ -36,8 +36,16 @@ export const IT = {
   change_email: "Cambia E-mail",
   email_sent_pre: "Un'email è stata inviata a ",
   email_sent_post:
-    " controlla la tua email e segui le istruzioni per attivare il tuo account.",
+    " controlla la tua email e scriva qui il codice di validazione per attivare il suo account.",
   change_validation_email: "Cambia E-mail di validazione",
   new_email: "Inserisci nuova E-mail di validazione",
   proceed: "Procedi",
+  validate_email_subject: "Valida la tua E-mail - BOSolution",
+  email_prefix: "Caro/a Sig./ra",
+  email_message: "Clicca sul seguente link per validare la tua E-mail",
+  email_submessage: "Se non hai richiesto questo, ignora questa email",
+  email_verify_label: "Verifica E-mail",
+  validation_code: "Codice di validazione",
+  send_email: "Invia E-mail",
+  validate: "Valida",
 };

@@ -20,11 +20,33 @@ export const Validation = ({ navigator }) => {
   const { i18n, locale } = useContext(LanguageContext);
   const { user, validate } = useContext(AuthContext);
   const [email, setEmail] = useState(user.email);
+  const [validationCode, setValidationCode] = useState(null);
   const [error, setError] = useState("");
+  const [changeEmail, setChangeEmail] = useState(null);
+
+  const sendValidationMail = () => {
+    axiosInstance.post("/Security/sendValidation", {
+      email: email,
+      fullName: `${user.name} ${user.lastname}`,
+      subject: i18n.t("validate_email_subject"),
+      prefix: i18n.t("email_prefix"),
+      message: i18n.t("email_message"),
+      subMessage: i18n.t("email_submessage"),
+      verify: i18n.t("email_verify_label"),
+    });
+  };
 
   const changeValidationMail = () => {
     axiosInstance
-      .post("/Security/changevalidationmail", { email: email })
+      .post("/Security/changevalidationmail", {
+        email: changeEmail,
+        fullName: `${user.name} ${user.lastname}`,
+        subject: i18n.t("validate_email_subject"),
+        prefix: i18n.t("email_prefix"),
+        message: i18n.t("email_message"),
+        subMessage: i18n.t("email_submessage"),
+        verify: i18n.t("email_verify_label"),
+      })
       .then()
       .error();
   };
@@ -44,11 +66,31 @@ export const Validation = ({ navigator }) => {
           >
             {i18n.t("validate")}
           </Heading>
-          <Text fontSize={"sm"}>
-            {i18n.t("email_sent_pre")}
+          <Text fontSize={"sm"}>{i18n.t("email_sent_pre")}</Text>
+          <Text fontSize={"sm"} fontWeight={"bold"}>
             {user.email}
-            {i18n.t("email_sent_post")}
           </Text>
+          <Text>{i18n.t("email_sent_post")}</Text>
+          <Button colorScheme={"primary"} onPress={() => sendValidationMail()}>
+            <Text color="white">{i18n.t("send_email")}</Text>
+          </Button>
+          <FormControl>
+            <FormControl.Label>
+              <Text>{i18n.t("validation_code")}</Text>
+            </FormControl.Label>
+            <FormControl>
+              <Input
+                placeholder={i18n.t("validation_code")}
+                onChangeText={(value) => setValidationCode(value)}
+              ></Input>
+            </FormControl>
+          </FormControl>
+          <Button
+            colorScheme={"primary"}
+            onPress={() => validate(validationCode)}
+          >
+            <Text color="white">{i18n.t("validate")}</Text>
+          </Button>
           <FormControl>
             <FormControl.Label>
               {i18n.t("change_validation_email")}
@@ -56,14 +98,14 @@ export const Validation = ({ navigator }) => {
             <Input
               text="change"
               placeholder={i18n.t("new_email")}
-              onChangeText={(value) => setEmail(value)}
+              onChangeText={(value) => setChangeEmail(value)}
             />
           </FormControl>
           <Button
             colorScheme={"primary"}
             onPress={() => changeValidationMail()}
           >
-            <Text>{i18n.t("change_email")}</Text>
+            <Text color="white">{i18n.t("change_email")}</Text>
           </Button>
         </VStack>
       </Box>
