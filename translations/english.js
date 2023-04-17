@@ -48,4 +48,11 @@ export const EN = {
   validation_code: "Validation code",
   validate: "Validate",
   send_email: "Send email",
+  email_sent: "Email has been sent",
+  missing_connection:
+    "Missing connection or server offline, please try again later",
+  problem_sending_email:
+    "Our servers encountered problems during email sending, please try again later",
+  email_validated: "The code is correct, email has been validated",
+  wrong_validation_code: "The code is not correct, please try again",
 };

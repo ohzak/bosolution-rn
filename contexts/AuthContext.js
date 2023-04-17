@@ -11,6 +11,7 @@ const initialState = {
   isAuthenticated: false,
   isInitialized: false,
   user: null,
+  roles: null,
 };
 
 const handlers = {
@@ -24,18 +25,20 @@ const handlers = {
     };
   },
   LOGIN: (state, action) => {
-    const { user } = action.payload;
+    const { user, roles } = action.payload;
 
     return {
       ...state,
       isAuthenticated: true,
       user,
+      roles,
     };
   },
   LOGOUT: (state) => ({
     ...state,
     isAuthenticated: false,
     user: null,
+    roles: null,
   }),
   REGISTER: (state, action) => {
     const { user } = action.payload;
@@ -47,10 +50,19 @@ const handlers = {
     };
   },
   VALIDATE: (state, action) => {
-    const { user } = action.payload;
+    const { user, roles } = action.payload;
     return {
       ...state,
       user,
+      roles,
+    };
+  },
+  REFRESH: (state, action) => {
+    const { user, roles } = action.payload;
+    return {
+      ...state,
+      user,
+      roles,
     };
   },
 };
@@ -64,6 +76,7 @@ const AuthContext = createContext({
   logout: () => Promise.resolve(),
   register: () => Promise.resolve(),
   validate: () => Promise.resolve(),
+  refresh: () => Promise.resolve(),
 });
 
 // ----------------------------------------------------------------------
@@ -122,7 +135,7 @@ function AuthProvider({ children }) {
       email,
       password,
     });
-    const { accessToken, user } = response.data;
+    const { accessToken, user, roles } = response.data;
 
     setSession(accessToken);
 
@@ -130,6 +143,7 @@ function AuthProvider({ children }) {
       type: "LOGIN",
       payload: {
         user,
+        roles,
       },
     });
   };
@@ -170,14 +184,25 @@ function AuthProvider({ children }) {
     });
   };
 
+  const refresh = async () => {
+    const response = await axios.get("/Security/refresh");
+    const { accessToken, user, roles } = response.data;
+
+    dispatch({
+      type: "REFRESH",
+      payload: { user, roles },
+    });
+  };
+
   const validate = async () => {
     const response = await axios.get("/Security/validation");
-    const { accessToken, user } = response.data;
+    const { accessToken, user, roles } = response.data;
 
     dispatch({
       type: "VALIDATE",
       payload: {
         user,
+        roles,
       },
     });
   };
@@ -196,6 +221,7 @@ function AuthProvider({ children }) {
         logout,
         register,
         validate,
+        refresh,
       }}
     >
       {children}

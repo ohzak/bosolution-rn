@@ -12,14 +12,14 @@ import { SignUp_Address } from "../pages/Registration/SignUp_Address";
 const Stack = createNativeStackNavigator();
 
 export const NavigationProvider = ({ children }) => {
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, roles, isAuthenticated } = useContext(AuthContext);
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: true }}>
         {isAuthenticated ? (
           // schermate per utenti loggati
-          user.roles?.includes("valid") ? (
+          roles?.includes("Valid") ? (
             <Stack.Group>
               <Stack.Screen name="Home" component={Home} />
             </Stack.Group>

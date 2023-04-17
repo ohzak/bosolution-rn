@@ -50,5 +50,12 @@ export const DE = {
   email_verify_label: "E-Mail überprüfen",
   validation_code: "Bestätigungscode",
   send_email: "E-Mail senden",
+  email_sent: "E-Mail wurde gesendet",
   validate: "Bestätigen",
+  missing_connection:
+    "Verbindung fehlt oder Server offline, bitte versuchen Sie es später noch einmal",
+  problem_sending_email:
+    "Unsere Server hatten Probleme beim Senden von E-Mails, bitte versuchen Sie es später noch einmal",
+  wrong_validation_code: "Der Validierungscode ist falsch",
+  email_validated: "E-Mail hat bestätigt",
 };

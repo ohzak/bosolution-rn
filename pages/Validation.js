@@ -21,21 +21,58 @@ export const Validation = ({ navigator }) => {
   const { user, validate } = useContext(AuthContext);
   const [email, setEmail] = useState(user.email);
   const [validationCode, setValidationCode] = useState(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState({});
+  const [confirmation, setConfirmation] = useState({});
   const [changeEmail, setChangeEmail] = useState(null);
 
   const sendValidationMail = () => {
-    axiosInstance.post("/Security/sendValidation", {
-      email: email,
-      fullName: `${user.name} ${user.lastname}`,
-      subject: i18n.t("validate_email_subject"),
-      prefix: i18n.t("email_prefix"),
-      message: i18n.t("email_message"),
-      subMessage: i18n.t("email_submessage"),
-      verify: i18n.t("email_verify_label"),
-    });
+    axiosInstance
+      .post("/Security/sendValidation", {
+        email: email,
+        fullName: `${user.name} ${user.lastname}`,
+        subject: i18n.t("validate_email_subject"),
+        prefix: i18n.t("email_prefix"),
+        message: i18n.t("email_message"),
+        subMessage: i18n.t("email_submessage"),
+        verify: i18n.t("email_verify_label"),
+      })
+      .then((response) => {
+        switch (response.status) {
+          case 200:
+            setConfirmation({ ...confirmation, send: i18n.t("email_sent") });
+            break;
+          case 400:
+            setError({ ...error, send: i18n.t("problem_sending_email") });
+          case 404:
+            setError(i18n.t({ ...error, send: "missing_connection" }));
+        }
+      });
   };
-
+  const sendValidationCode = () => {
+    axiosInstance
+      .post("/Security/validateEmail", {
+        code: validationCode,
+      })
+      .then((response) => {
+        switch (response.status) {
+          case 200:
+            setConfirmation({
+              ...confirmation,
+              code: i18n.t("email_validated"),
+            });
+            setTimeout(() => {
+              refreshUser();
+            }, 3000);
+            break;
+          case 400:
+            setError({ ...error, code: i18n.t("wrong_validation_code") });
+            break;
+          case 404:
+            setError(i18n.t({ ...error, code: "missing_connection" }));
+            break;
+        }
+      });
+  };
   const changeValidationMail = () => {
     axiosInstance
       .post("/Security/changevalidationmail", {
@@ -47,7 +84,22 @@ export const Validation = ({ navigator }) => {
         subMessage: i18n.t("email_submessage"),
         verify: i18n.t("email_verify_label"),
       })
-      .then()
+      .then((response) => {
+        switch (response.status) {
+          case 200:
+            setConfirmation({
+              ...confirmation,
+              change: i18n.t("email_sent"),
+            });
+            break;
+          case 400:
+            setError({ ...error, change: i18n.t("problem_sending_email") });
+            break;
+          case 404:
+            setError(i18n.t({ ...error, change: "missing_connection" }));
+            break;
+        }
+      })
       .error();
   };
 
@@ -71,9 +123,21 @@ export const Validation = ({ navigator }) => {
             {user.email}
           </Text>
           <Text>{i18n.t("email_sent_post")}</Text>
-          <Button colorScheme={"primary"} onPress={() => sendValidationMail()}>
-            <Text color="white">{i18n.t("send_email")}</Text>
-          </Button>
+          <FormControl>
+            <Button
+              colorScheme={"primary"}
+              onPress={() => sendValidationMail()}
+            >
+              <Text color="white">{i18n.t("send_email")}</Text>
+            </Button>
+            <FormControl.ErrorMessage>
+              {error?.send ?? null}
+            </FormControl.ErrorMessage>
+            <FormControl.HelperText color={"success.500"}>
+              {confirmation?.send ?? null}
+            </FormControl.HelperText>
+          </FormControl>
+
           <FormControl>
             <FormControl.Label>
               <Text>{i18n.t("validation_code")}</Text>
@@ -85,12 +149,20 @@ export const Validation = ({ navigator }) => {
               ></Input>
             </FormControl>
           </FormControl>
-          <Button
-            colorScheme={"primary"}
-            onPress={() => validate(validationCode)}
-          >
-            <Text color="white">{i18n.t("validate")}</Text>
-          </Button>
+          <FormControl>
+            <Button
+              colorScheme={"primary"}
+              onPress={() => sendValidationCode()}
+            >
+              <Text color="white">{i18n.t("validate")}</Text>
+            </Button>
+            <FormControl.HelperText color={"success.500"}>
+              {confirmation?.code ?? null}
+            </FormControl.HelperText>
+            <FormControl.ErrorMessage>
+              {error?.code ?? null}
+            </FormControl.ErrorMessage>
+          </FormControl>
           <FormControl>
             <FormControl.Label>
               {i18n.t("change_validation_email")}
@@ -101,12 +173,20 @@ export const Validation = ({ navigator }) => {
               onChangeText={(value) => setChangeEmail(value)}
             />
           </FormControl>
-          <Button
-            colorScheme={"primary"}
-            onPress={() => changeValidationMail()}
-          >
-            <Text color="white">{i18n.t("change_email")}</Text>
-          </Button>
+          <FormControl>
+            <Button
+              colorScheme={"primary"}
+              onPress={() => changeValidationMail()}
+            >
+              <Text color="white">{i18n.t("change_email")}</Text>
+            </Button>
+            <FormControl.HelperText>
+              {confirmation?.change ?? null}
+            </FormControl.HelperText>
+            <FormControl.ErrorMessage>
+              {error?.change ?? null}
+            </FormControl.ErrorMessage>
+          </FormControl>
         </VStack>
       </Box>
     </Center>

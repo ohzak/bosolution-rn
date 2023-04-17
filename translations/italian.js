@@ -47,5 +47,13 @@ export const IT = {
   email_verify_label: "Verifica E-mail",
   validation_code: "Codice di validazione",
   send_email: "Invia E-mail",
+  email_sent: "L' E-mail è stata inviata",
   validate: "Valida",
+  missing_connection:
+    "Connessione mancante o server offline, riprovare più tardi",
+  problem_sending_email:
+    "I nostri server hanno riscontrato problemi durante l'invio dell'email, riprovare più tardi",
+  wrong_validation_code:
+    "Il codice di validazione è errato, si prega di riprovare",
+  email_validated: "Il codice è corretto, l' E-mail è stata convalidata",
 };
