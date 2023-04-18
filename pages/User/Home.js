@@ -47,7 +47,7 @@ export default function Home({ navigation }) {
           </Text>
         </Link>
         <ToggleDarkMode />
-        <Button onPress={() => this.props.navigation.openDrawer()}>
+        <Button onPress={() => {}}>
           <Text>Go to Test</Text>
         </Button>
       </VStack>
