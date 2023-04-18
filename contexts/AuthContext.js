@@ -16,12 +16,13 @@ const initialState = {
 
 const handlers = {
   INITIALIZE: (state, action) => {
-    const { isAuthenticated, user } = action.payload;
+    const { isAuthenticated, user, roles } = action.payload;
     return {
       ...state,
       isAuthenticated,
       isInitialized: true,
       user,
+      roles,
     };
   },
   LOGIN: (state, action) => {
@@ -94,16 +95,17 @@ function AuthProvider({ children }) {
         const accessToken = await AsyncStorage.getItem("accessToken");
 
         if (accessToken && isValidToken(accessToken)) {
-          setSession(accessToken);
+          await setSession(accessToken);
 
-          const response = await axios.get("/Users/logged");
-          const { user } = response.data;
+          const response = await axios.get("/Security/refresh");
+          const { user, roles } = response.data;
 
           dispatch({
             type: "INITIALIZE",
             payload: {
               isAuthenticated: true,
               user,
+              roles,
             },
           });
         } else {
@@ -112,6 +114,7 @@ function AuthProvider({ children }) {
             payload: {
               isAuthenticated: false,
               user: null,
+              roles: null,
             },
           });
         }
@@ -122,6 +125,7 @@ function AuthProvider({ children }) {
           payload: {
             isAuthenticated: false,
             user: null,
+            roles: null,
           },
         });
       }

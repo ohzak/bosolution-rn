@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthContext } from "../contexts/AuthContext";
 import { Login } from "../pages/Login";
 import { SignUp } from "../pages/Registration/SignUp_User";
-import { Home } from "../pages/Home";
+import { UserDrawerScreen } from "./userNavigation";
 import { GooglePlaces } from "../pages/GooglePlaces";
 import { Validation } from "../pages/Validation";
 import { SignUp_Address } from "../pages/Registration/SignUp_Address";
@@ -21,7 +21,11 @@ export const NavigationProvider = ({ children }) => {
           // schermate per utenti loggati
           roles?.includes("Valid") ? (
             <Stack.Group>
-              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen
+                name="UserHome"
+                component={UserDrawerScreen}
+                options={{ headerShown: false }}
+              />
             </Stack.Group>
           ) : (
             <Stack.Group>

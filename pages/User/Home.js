@@ -2,17 +2,17 @@ import {
   Box,
   Button,
   Center,
-  Heading,
   HStack,
+  Heading,
   Link,
   Switch,
   Text,
-  useColorMode,
   VStack,
+  useColorMode,
 } from "native-base";
-import NativeBaseIcon from "../components/NativeBaseIcon";
+import NativeBaseIcon from "../../components/NativeBaseIcon";
 
-export function Home({ navigation }) {
+export default function Home({ navigation }) {
   return (
     <Center
       _dark={{ bg: "blueGray.900" }}
@@ -47,7 +47,7 @@ export function Home({ navigation }) {
           </Text>
         </Link>
         <ToggleDarkMode />
-        <Button onPress={() => navigation.navigate("Login")}>
+        <Button onPress={() => this.props.navigation.openDrawer()}>
           <Text>Go to Test</Text>
         </Button>
       </VStack>
