@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'bosolution'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D159FF802AB42CD8AC636E9569B71D2 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8DF1B571B263400D82B6B79BC800D4A3 }}
           package: .
