@@ -19,14 +19,14 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: "6.0.x"
           include-prerelease: true
       - name: Setup EAS
-      uses: expo/expo-github-action@v8
-      with:
-        expo-version: latest
-        eas-version: latest
-        token: bGg_rmaTIfDKtYwLJQphs72HPViIibkpt1pS8EZ3
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: bGg_rmaTIfDKtYwLJQphs72HPViIibkpt1pS8EZ3
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -56,7 +56,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'bosolution'
-          slot-name: 'Production'
+          app-name: "bosolution"
+          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C61AD3ED7AC94316BA84844E2661745C }}
           package: .
