@@ -21,7 +21,12 @@ jobs:
         with:
           dotnet-version: '6.0.x'
           include-prerelease: true
-
+      - name: Setup EAS
+      uses: expo/expo-github-action@v8
+      with:
+        expo-version: latest
+        eas-version: latest
+        token: bGg_rmaTIfDKtYwLJQphs72HPViIibkpt1pS8EZ3
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
