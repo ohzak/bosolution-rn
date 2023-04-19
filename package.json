@@ -10,12 +10,12 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "expo build:web",
-    "start": "npm install -g expo-cli && expo start --web",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject",
+    "build": "npx expo export:web",
+    "start": "npx expo start --web --release",
+    "android": "npx expo start --android",
+    "ios": "npx expo start --ios",
+    "web": "npx expo start --web",
+    "eject": "npx expo eject",
     "proxy": "lcp --proxyUrl https://maps.googleapis.com/maps/api"
   },
   "dependencies": {
