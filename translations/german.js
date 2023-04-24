@@ -58,4 +58,5 @@ export const DE = {
     "Unsere Server hatten Probleme beim Senden von E-Mails, bitte versuchen Sie es später noch einmal",
   wrong_validation_code: "Der Validierungscode ist falsch",
   email_validated: "E-Mail hat bestätigt",
+  documents: "Dokumente",
 };

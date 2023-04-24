@@ -15,7 +15,13 @@ import {
   Text,
   Pressable,
   useColorModeValue,
+  Icon,
+  HStack,
+  VStack,
 } from "native-base";
+import { Feather } from "@expo/vector-icons";
+import { LanguageContext } from "../../translations/translationContext";
+import { pickDocument } from "../../utils/documentpicker";
 
 const FirstRoute = () => (
   <Center flex={1} my="4">
@@ -49,6 +55,8 @@ const renderScene = SceneMap({
 });
 
 export default function Documents({ navigation }) {
+  const { i18n } = React.useContext(LanguageContext);
+
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {
@@ -124,19 +132,33 @@ export default function Documents({ navigation }) {
   return (
     <Center flex={1} backgroundColor={"white"}>
       <Box w="80%" p="4">
-        <TabView
-          navigationState={{
-            index,
-            routes,
-          }}
-          renderScene={renderScene}
-          renderTabBar={renderTabBar}
-          onIndexChange={setIndex}
-          initialLayout={initialLayout}
-          style={{
-            marginTop: StatusBar.currentHeight,
-          }}
-        />
+        <VStack>
+          <Button
+            w="150px"
+            colorScheme="primary"
+            alignSelf={"flex-end"}
+            mb={5}
+            onPress={pickDocument}
+          >
+            <HStack alignItems={"center"}>
+              <Icon as={Feather} name={"plus"} color={"white"}></Icon>
+              <Text color="white">{i18n.t("documents")}</Text>
+            </HStack>
+          </Button>
+          <TabView
+            navigationState={{
+              index,
+              routes,
+            }}
+            renderScene={renderScene}
+            renderTabBar={renderTabBar}
+            onIndexChange={setIndex}
+            initialLayout={initialLayout}
+            style={{
+              marginTop: StatusBar.currentHeight,
+            }}
+          />
+        </VStack>
       </Box>
     </Center>
   );

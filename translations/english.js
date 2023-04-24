@@ -55,4 +55,5 @@ export const EN = {
     "Our servers encountered problems during email sending, please try again later",
   email_validated: "The code is correct, email has been validated",
   wrong_validation_code: "The code is not correct, please try again",
+  documents: "Documents",
 };

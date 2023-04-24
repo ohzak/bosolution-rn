@@ -56,4 +56,5 @@ export const IT = {
   wrong_validation_code:
     "Il codice di validazione è errato, si prega di riprovare",
   email_validated: "Il codice è corretto, l' E-mail è stata convalidata",
+  documents: "Documenti",
 };
