@@ -102,6 +102,7 @@ export default function Documents({ navigation }) {
               : useColorModeValue("coolGray.200", "gray.400");
           return (
             <Pressable
+              key={i}
               borderBottomWidth="3"
               borderColor={borderColor}
               flex={1}
@@ -138,7 +139,7 @@ export default function Documents({ navigation }) {
             colorScheme="primary"
             alignSelf={"flex-end"}
             mb={5}
-            onPress={pickDocument}
+            onPress={() => pickDocument()}
           >
             <HStack alignItems={"center"}>
               <Icon as={Feather} name={"plus"} color={"white"}></Icon>
